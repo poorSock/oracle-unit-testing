@@ -1,0 +1,19 @@
+services:
+  oracle-23c:
+    image: container-registry.oracle.com/database/free:latest
+    container_name: oracle-factorio-playground
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      ORACLE_PASSWORD: "admin"
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - type: bind
+        source: ./utPLSQL
+        target: /opt/utPLSQL
+volumes:
+  oracle_data:
+    driver: local
+  utPLSQL:
+    driver: local
